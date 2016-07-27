@@ -53,6 +53,7 @@
 #include <string.h>
 #include <syslog.h>
 #include <unistd.h>
+#include <crypt.h>
 #include <stdarg.h>
 
 #ifdef HAVE_OSRELDATE_H
@@ -648,8 +649,9 @@ send_mime(httpd_conn * hc, int status, char *title, char *encodings,
 					   (long long) length,
 					   (long long) (hc->last_byte_index
 							-
-							hc->first_byte_index
-							+ 1));
+							hc->
+							first_byte_index +
+							1));
 			add_response(hc, buf);
 		} else if (length >= 0) {
 			(void) my_snprintf(buf, sizeof(buf),
@@ -2080,13 +2082,17 @@ int httpd_parse_request(httpd_conn * hc)
 							*cp_dash = '\0';
 							hc->got_range = 1;
 							hc->first_byte_index = atoll(cp + 1);
-							if (hc->first_byte_index < 0)
+							if (hc->
+							    first_byte_index
+							    < 0)
 								hc->first_byte_index = 0;
 							if (isdigit((int)
 								    cp_dash
 								    [1])) {
 								hc->last_byte_index = atoll(cp_dash + 1);
-								if (hc->last_byte_index < 0)
+								if (hc->
+								    last_byte_index
+								    < 0)
 									hc->last_byte_index = -1;
 							}
 						}
@@ -2125,8 +2131,8 @@ int httpd_parse_request(httpd_conn * hc)
 				cp = &buf[16];
 				cp += strspn(cp, "\t");
 				inet_aton(cp,
-					  &(hc->client_addr.
-					    sa_in.sin_addr));
+					  &(hc->client_addr.sa_in.
+					    sin_addr));
 			}
 #ifdef LOG_UNKNOWN_HEADERS
 			else if (strncasecmp(buf, "Accept-Charset:", 15) == 0 || strncasecmp(buf, "Accept-Language:", 16) == 0 || strncasecmp(buf, "Agent:", 6) == 0 || strncasecmp(buf, "Cache-Control:", 14) == 0 || strncasecmp(buf, "Cache-Info:", 11) == 0 || strncasecmp(buf, "Charge-To:", 10) == 0 || strncasecmp(buf, "Client-IP:", 10) == 0 || strncasecmp(buf, "Date:", 5) == 0 || strncasecmp(buf, "Extension:", 10) == 0 || strncasecmp(buf, "Forwarded:", 10) == 0 || strncasecmp(buf, "From:", 5) == 0 || strncasecmp(buf, "HTTP-Version:", 13) == 0 || strncasecmp(buf, "Max-Forwards:", 13) == 0 || strncasecmp(buf, "Message-Id:", 11) == 0 || strncasecmp(buf, "MIME-Version:", 13) == 0 || strncasecmp(buf, "Negotiate:", 10) == 0 || strncasecmp(buf, "Pragma:", 7) == 0 || strncasecmp(buf, "Proxy-Agent:", 12) == 0 || strncasecmp(buf, "Proxy-Connection:", 17) == 0 || strncasecmp(buf, "Security-Scheme:", 16) == 0 || strncasecmp(buf, "Session-Id:", 11) == 0 || strncasecmp(buf, "UA-Color:", 9) == 0 || strncasecmp(buf, "UA-CPU:", 7) == 0 || strncasecmp(buf, "UA-Disp:", 8) == 0 || strncasecmp(buf, "UA-OS:", 6) == 0 || strncasecmp(buf, "UA-Pixels:", 10) == 0 || strncasecmp(buf, "User:", 5) == 0 || strncasecmp(buf, "Via:", 4) == 0 || strncasecmp(buf, "X-", 2) == 0);	/* ignore */
@@ -2712,7 +2718,8 @@ mode  links    bytes  last-changed  name\n\
 				} else {
 					(void) my_snprintf(name, maxname,
 							   "%s/%s",
-							   hc->expnfilename,
+							   hc->
+							   expnfilename,
 							   nameptrs[i]);
 					if (strcmp(hc->origfilename, ".")
 					    == 0)
@@ -2725,7 +2732,8 @@ mode  links    bytes  last-changed  name\n\
 						(void) my_snprintf(rname,
 								   maxrname,
 								   "%s%s",
-								   hc->origfilename,
+								   hc->
+								   origfilename,
 								   nameptrs
 								   [i]);
 				}
@@ -3803,8 +3811,8 @@ static void make_log_entry(httpd_conn * hc, struct timeval *nowP)
 		(void) my_snprintf(url, sizeof(url),
 				   "/%.100s%.200s",
 				   hc->hostname ==
-				   (char *) 0 ? hc->
-				   hs->server_hostname : hc->hostname,
+				   (char *) 0 ? hc->hs->
+				   server_hostname : hc->hostname,
 				   hc->encodedurl);
 	else
 		(void) my_snprintf(url, sizeof(url),

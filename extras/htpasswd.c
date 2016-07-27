@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <crypt.h>
 
 #define LF 10
 #define CR 13
@@ -90,25 +91,6 @@ static void to64(register char *s, register long v, register int n)
 	}
 }
 
-#ifdef MPE
-/* MPE lacks getpass() and a way to suppress stdin echo.  So for now, just
-issue the prompt and read the results with echo.  (Ugh). */
-
-char *getpass(const char *prompt)
-{
-
-	static char password[81];
-
-	fputs(prompt, stderr);
-	gets((char *) &password);
-
-	if (strlen((char *) &password) > 8) {
-		password[8] = '\0';
-	}
-
-	return (char *) &password;
-}
-#endif
 
 static void add_password(char *user, FILE * f)
 {

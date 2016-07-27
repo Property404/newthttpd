@@ -1,3 +1,15 @@
+- - - - - - - - - -   NEWThttpd - - - - - - - - - - -
+Rewrite htpasswd.c
+	Use PBKDF2/bcrypt/scrypt with SHA256
+	Use large salt (at least 64 bit)
+	Use CSPRNG
+	Removed deprecated POSIX stuff
+	Handle errors, a la sthttpd's htpasswd.c
+Configure newthttpd to work with htpasswd.c
+	Use a common crypto header between the two
+Pipedream - switch to HTTP version 2
+Consolidate src in ./src
+
 - - - - - - - - - - high priority - - - - - - - - - -
 
 IPv6 not working right.
