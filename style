@@ -1,2 +1,2 @@
 #!/bin/sh
-indent -kr -i8 *.c *.h extras/*.c 
+indent -kr -i8 *.c *.h extras/*.c cgi-src/*.c

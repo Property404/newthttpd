@@ -1,17 +1,12 @@
-             thttpd - tiny/turbo/throttling HTTP server
-                    version 2.27 of 19Oct2015
+NewtHTTPd version 0.0.0(prealpha) on July2016
 
-thttpd is a simple, small, portable, fast, and secure HTTP server.
+NewtHTTPd is a simple, small, portable, fast, and secure HTTP server based on thttpd 2.27.
 
 Simple: It handles only the minimum necessary to implement HTTP/1.1.
 
-Small: See the size comparison chart at
-http://www.acme.com/software/thttpd/notes.html#sizes.  It also has a
-very small run-time size, since it does not fork and is very careful about
-memory allocation.
+Small: It has a very small run-time size, since it does not fork and is very careful about memory allocation.
 
-Portable: It compiles cleanly on FreeBSD 2.x/3.x, SunOS 4.1.x, Solaris 2.x,
-BSD/OS 2.x, Linux 1.2.x, OSF/1 (on a 64-bit Alpha), and no doubt many others.
+Portable: Targeting POSIX systems: modern GNU/Linux, macOS, and FreeBSD
 
 Fast: In typical use it's about as fast as the best full-featured servers
 (Apache, NCSA, Netscape).  Under extreme load it's much faster.
@@ -24,8 +19,7 @@ no other server currently has.
 
 See the manual entry for more details.  See the INSTALL file for
 configuration and installation instructions.  Check the web page
-(http://www.acme.com/software/thttpd/) for updates, or add yourself to
-the mailing list by sending a "subscribe" to thttpd-announce-request@mail.acme.com.
+(https://github.com/Property404/newthttpd) for updates.
 
 Comments to:
-    Jef Poskanzer  jef@mail.acme.com  http://www.acme.com/jef/
+	Dagan Martinez		https://github.com/Property404
