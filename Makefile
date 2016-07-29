@@ -1,3 +1,4 @@
+# Generated automatically from Makefile.in by configure.
 # Makefile.in for thttpd
 #
 # Copyright © 1995,1998 by Jef Poskanzer <jef@mail.acme.com>.
@@ -27,12 +28,12 @@
 # Various configurable paths (remember to edit Makefile.in, not Makefile)
 
 # Top level hierarchy.
-prefix = @prefix@
-exec_prefix = @exec_prefix@
+prefix = /usr/local
+exec_prefix = ${prefix}
 # Pathname of directory to install the binary.
-BINDIR = @sbindir@
+BINDIR = ${exec_prefix}/sbin
 # Pathname of directory to install the man page.
-MANDIR = @mandir@
+MANDIR = ${prefix}/man
 # Pathname of directory to install the CGI programs.
 WEBDIR = $(prefix)/www
 
@@ -46,16 +47,16 @@ CGIBINDIR =	$(WEBDIR)/cgi-bin
 
 # You shouldn't need to edit anything below here.
 
-CC =		@CC@
-DEFS =		@DEFS@
+CC =		gcc
+DEFS =		 -DHAVE__PROGNAME=1 -DHAVE_FCNTL_H=1 -DHAVE_GRP_H=1 -DHAVE_MEMORY_H=1 -DHAVE_PATHS_H=1 -DHAVE_POLL_H=1 -DHAVE_SYS_POLL_H=1 -DTIME_WITH_SYS_TIME=1 -DHAVE_DIRENT_H=1 -DHAVE_LIBCRYPT=1 -DHAVE_STRERROR=1 -DHAVE_WAITPID=1 -DHAVE_VSNPRINTF=1 -DHAVE_DAEMON=1 -DHAVE_SETSID=1 -DHAVE_GETADDRINFO=1 -DHAVE_GETNAMEINFO=1 -DHAVE_GAI_STRERROR=1 -DHAVE_SIGSET=1 -DHAVE_ATOLL=1 -DHAVE_UNISTD_H=1 -DHAVE_GETPAGESIZE=1 -DHAVE_MMAP=1 -DHAVE_SELECT=1 -DHAVE_POLL=1 -DHAVE_TM_GMTOFF=1 -DHAVE_INT64T=1 -DHAVE_SOCKLENT=1 
 INCLS =		-I.
 CFLAGS +=	$(DEFS) $(INCLS)
-LDFLAGS =	@LDFLAGS@
-LIBS =		@LIBS@
-NETLIBS =	@V_NETLIBS@
-INSTALL =	@INSTALL@
+LDFLAGS =	
+LIBS =		-lcrypt 
+NETLIBS =	
+INSTALL =	/usr/bin/install -c
 
-@SET_MAKE@
+
 
 .c.o:
 	@rm -f $@
@@ -63,7 +64,7 @@ INSTALL =	@INSTALL@
 
 SRC =		thttpd.c libhttpd.c fdwatch.c mmc.c timers.c match.c tdate_parse.c
 
-OBJ =		$(SRC:.c=.o) @LIBOBJS@
+OBJ =		$(SRC:.c=.o) 
 
 ALL =		thttpd
 
